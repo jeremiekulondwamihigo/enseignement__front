@@ -1,0 +1,98 @@
+.papier{
+    padding: 5px;
+    width: 40%;
+    height: 70vh;
+    overflow-y: auto;
+    overflow-x: auto;
+    
+}
+.papier .option > h2{
+    font-weight: 600;
+    font-size: 15px;
+    opacity: 0.6;
+    color: black;
+    font-family: sans-serif, Arial, Helvetica, sans-serif;
+}
+li{
+    cursor: pointer;
+    margin-bottom: 7px;
+    transition: 0.5s ease-in;
+}
+li:hover{
+    margin-left: 10px;
+    color: blue;
+}
+.div > .span1{
+    display: flex;
+    height: 5vh;
+    align-items: center;
+    align-content: center;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.div{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    position: relative;
+    
+}
+.div > .span2{
+    cursor: pointer;
+    z-index: 20;
+}
+
+.div > p{
+    margin-left: 3px;
+}
+.papier2{
+    padding: 10px;
+    width: 58%;
+    height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.divContainer{
+    display: flex;
+    justify-content: space-between;
+}
+.container-option{
+    position: relative;
+
+}
+.affiche_option{
+    display: flex;
+    margin-top: 1rem;
+    height: 4vh;
+    width: 100%;
+    background-color: #dedede;
+    padding: 5px;
+    border-radius: 5px;
+    justify-content: space-between;
+    cursor: pointer;
+}
+table{
+    border-collapse: collapse;
+    margin-top: 15px;
+    justify-content: space-between;
+    width: 100%;
+    
+}
+thead{
+    background-color: #dedede;
+    padding: 5px;
+}
+thead > tr{
+    padding: 10px;
+    width: 20%;
+    padding: 5px;
+}
+table > tbody > .domaine{
+    color: white;
+    text-align: center;
+}
+.img-avatar{
+    justify-content: center;
+    justify-items: center;
+} 

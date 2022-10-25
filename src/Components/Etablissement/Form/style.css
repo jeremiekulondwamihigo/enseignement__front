@@ -1,0 +1,11 @@
+.imageAgent{
+    border-color: 10px solid black;
+    margin-bottom: 5px;
+}
+.imageAgent > img{
+    height: 10rem;
+    width: 10rem;
+}
+h5{
+    font-weight: 800;
+}
