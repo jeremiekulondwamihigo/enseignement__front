@@ -1,91 +1,113 @@
-import React, { useState } from 'react';
-import "./loginScreen.css";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { lien_create } from "../Static/Liens"
-
+import React, { useState } from 'react'
+import { Paper, Grid, Fab } from '@mui/material'
+import './style.css'
+import { Facebook, GitHub, Instagram } from '@mui/icons-material'
+import axios from 'axios'
+import { lien_create, isEmpty } from '../Static/Liens'
+import SnackFunction from '../Controls/Snack'
 
 function LoginScreen() {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-
-    const loginHandler = async (e)=>{
-        e.preventDefault();
-        const config = {
-            headers : {
-                "Content-Type":"application/json",
-            }
-        }
-
-        try {
-            const res = await axios.post(`${lien_create}/login`, { username, password }, config)
-           
-                if(res.data.sucess){
-                    
-                    localStorage.setItem("authToken", res.data.token)
-                    window.location.replace("/")
-
-                }else{
-                    setError(res.data.error)
-                }
-            
-            setTimeout(() => {
-                setError("")
-            }, 4000);
-
-        } catch (error) {
-            if(error){
-                setTimeout(() => {
-                    setError("")
-                }, 5000);
-            }
-        }   
-
+  const loginHandler = async (e) => {
+    e.preventDefault()
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
-    return (
-    <div className='login-screen'>
-        <form className='login-screen__form' onSubmit={loginHandler} >
-            <h3 className='login-screen__title'>Login</h3>
-            { error && <span className='error-message'>{error}</span>}
-            
-            <div className='form-group'>
-                <label htmlFor='email'>Email</label>
-                <input 
-                type="text" 
-                autoComplete='off'
-                required 
-                id="username" 
-                placeholder="Enter le nom d'utilisateur"
-                value={username} 
-                onChange={(e)=>setUsername(e.target.value)}
-                tabIndex={1}
-                />
-            </div>
-            <div className='form-group'>
-                <label htmlFor='password'>Password</label>
-                <input 
-                type="password"
-                autoComplete='off' 
-                required 
-                id="password" 
-                placeholder="Enter Password"
-                value={password} 
-                onChange={(e)=>setPassword(e.target.value)}
-                tabIndex={2}
-                />
-            </div>
-            
-            <button type='submit' className='btn btn-primary' tabIndex={3}>Login</button>
-            <span className='register-screen__subtext'>
-                Don't have a count ?
-                <Link to="/register">
-                    Register
-                </Link>
+
+    try {
+      const res = await axios.post(
+        `${lien_create}/login`,
+        { username, password },
+        config,
+      )
+
+      if (res.data.sucess) {
+        localStorage.setItem('authToken', res.data.token)
+        window.location.replace('/')
+      } else {
+        setError(res.data.error)
+      }
+
+      setTimeout(() => {
+        setError('')
+      }, 4000)
+    } catch (error) {
+      if (error) {
+        setTimeout(() => {
+          setError('')
+        }, 5000)
+      }
+    }
+  }
+  return (
+    <Paper elevation={7} className="PaperLoginee">
+      <Grid container>
+        <Grid items lg={6} md={6} className="first">
+          <div className="firstContent">
+            <h2>WELCOME</h2>
+            <h5>Enter your personal details and start journey with us</h5>
+          </div>
+        </Grid>
+        <Grid items lg={6} md={6} style={{ padding: '20px' }}>
+          <p className="auth">AUTHENTIFICATION</p>
+          <div className="icons">
+            <span>
+              <Fab size="small" color="primary">
+                <Facebook />
+              </Fab>
             </span>
-        </form>
-    </div>
+            <span>
+              <Fab size="small">
+                <GitHub />
+              </Fab>
+            </span>
+            <span>
+              <Fab size="small" color="red" style={{ color: 'red' }}>
+                <Instagram />
+              </Fab>
+            </span>
+          </div>
+          <h6 className="textS">
+            Use your username and password for identification
+          </h6>
+          <div className="error">
+            {!isEmpty(error) && <SnackFunction message={error} />}
+          </div>
+
+          <div className="second">
+            <div className="content">
+              <div>
+                <div className="dateS">
+                  <input
+                    placeholder="Username"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <div className="dateS">
+                  <input
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="btne">
+                  <button
+                    className="buttonLogin"
+                    onClick={(e) => loginHandler(e)}
+                  >
+                    Login
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Grid>
+      </Grid>
+    </Paper>
   )
 }
 

@@ -1,0 +1,104 @@
+.PaperLoginee {
+  margin: 100px;
+  border-radius: 20px !important;
+}
+.PaperLoginee .first {
+  background-image: linear-gradient(to bottom, #000, #0008), url('./eleve.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: cover top;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9b9797;
+  position: relative;
+  padding: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.second {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auth {
+  font-size: 20px;
+  text-align: center;
+}
+.textS {
+  font-size: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  position: relative;
+  padding: 10px;
+  width: 80%;
+}
+.contentText {
+  border-radius: 40px;
+}
+.dateS {
+  display: inline-block;
+  background: var(--color-light);
+  border-radius: 4rem;
+  padding: 0.5rem 1.6rem;
+  width: 80%;
+  margin-top: 10px;
+  height: 3rem;
+  margin-left: 3rem;
+}
+
+input {
+  background: transparent;
+  color: var(--color-dark);
+  width: 80%;
+  height: 100%;
+}
+.btne {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.buttonLogin {
+  padding: 10px 100px 10px 100px;
+  margin: 20px;
+  border-radius: 30px;
+  background-color: var(--color-dark);
+  color: white;
+  cursor: pointer;
+  transition: 0.5s ease-in all;
+  font-weight: bold;
+}
+.buttonLogin:hover {
+  background-color: var(--color-warning);
+}
+
+.icons {
+  text-align: center;
+  margin: 10px;
+  padding: 10px;
+}
+.icons > span {
+  margin-left: 20px;
+}
+.first .firstContent > h2 {
+  text-align: center;
+  color: #9b9797;
+  margin-bottom: 20px;
+}
+.first .firstContent > h5 {
+  font-size: 14px;
+}
+.error {
+  width: 70%;
+  position: relative;
+  bottom: 10px;
+}

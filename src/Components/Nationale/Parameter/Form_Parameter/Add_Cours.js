@@ -1,94 +1,142 @@
-import React, { useEffect, useState } from 'react'
-import { Box, TextField, Button, Select, MenuItem, FormControl, InputLabel } from "@mui/material"
-import { Add } from "@mui/icons-material"
+import React, { useState, useEffect } from 'react'
+import { Box, TextField, Button } from '@mui/material'
 import axios from 'axios'
-import { lien_create, lien_read, isEmpty } from "../../../Static/Liens" 
-
+import { lien_create, isEmpty, lien_update } from '../../../Static/Liens'
+import RadioButtonsGroup from '../../../Controls/RadioGroup'
+import AlertFunction from '../../../Controls/Alert'
 
 function Add_Cours(props) {
-
-    const { code_option, niveau } = props
-
-    const [domaine, setDomaine] = useState('');
-    const [cours, setCours] = useState("");
-    const [maxima, setMaxima] = useState(0);
-
-
-  const handleChange = (event) => {
-    setDomaine(event.target.value);
-  };
-  const [rechercheData, setRechercheDomaine] = useState([])
-  
+  const { code, niveau, loadingCours, data, branches } = props
 
   const config = {
-    headers : {
-      "Content-Type":"application/json",
-      "Authorization": "Bearer "+localStorage.getItem("authToken")
-    }
-  }
-  
-  const loading =()=>{
-      if(!isEmpty(niveau)){
-        axios.get(`${lien_read}/readdomaine/${code_option}/${niveau}`, config).then(respo=>{
-        setRechercheDomaine(respo.data)
-    })
-    }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('authToken'),
+    },
   }
 
-  useEffect(()=>{
-    loading()
-  }, [niveau, code_option])
+  const validation = [
+    { id: true, title: "Autoriser l'examen" },
+    { id: false, title: "Pas d'examen" },
+  ]
+  const [hookValidExamen, setValidExamen] = useState(true)
 
-  const submit =()=>{
-    axios.post(`${lien_create}/addcours`, { cours, domaine, id : new Date(), maxima }, config).then(response=>{
-        console.log(response)
+  const [values, setValue] = useState({ maxima: 0, branche: '' })
+  const { maxima, branche } = values
+
+  const handleChange = (e) => {
+    const { id, value } = e.target
+
+    setValue({
+      ...values,
+      [id]: value,
     })
+  }
+  useEffect(() => {
+    if (!isEmpty(data)) {
+      setValidExamen(Boolean(data.validExamen))
+      setValue({ ...data })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [branches])
+
+  let id = new Date()
+  const [messageAlert, setMessageAlert] = useState({
+    message: '',
+    error: Boolean,
+  })
+  const { message, error } = messageAlert
+
+  const functionModCours = (e) => {
+    axios
+      .put(
+        `${lien_update}/cours`,
+        {
+          valeur: values,
+          validExamen: hookValidExamen,
+          id: data._id,
+        },
+        config,
+      )
+      .then((response) => {
+        setMessageAlert(response.data)
+      })
+      .finally(() => {
+        loadingCours()
+      })
+
+    e.preventDefault()
+  }
+
+  const submitCours = async (e) => {
+    e.preventDefault()
+    const response = await axios.post(
+      `${lien_create}/cours`,
+      {
+        valeur: values,
+        classe: niveau,
+        id,
+        validExamen: hookValidExamen,
+        code_Option:
+          parseInt(niveau) > 5 ? 'Education de Base' : code.code_Option,
+      },
+      config,
+    )
+    setMessageAlert(response.data)
+    loadingCours()
   }
 
   return (
-      <Box
-        sx={{
-            width: 500,
-            maxWidth: '100%',
-            marginTop:"10px",
-            marginBottom: "10px"
-            
-          }}
-        >
-          
-            <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Selectionnez le domaine</InputLabel>
-        {
-            !isEmpty(rechercheData) &&
-            <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={domaine}
-            label="Age"
-            onChange={handleChange}
-            sx={{
-                width:500,
-                marginBottom : "10px"
-            }}
-            >
-                {
-                    rechercheData.map((index, key)=>{
-                        return <MenuItem key={key} value={index.code_domaine} >{index.domaine}</MenuItem>
-                    })
-                }
-            </Select>
-            }
-      </FormControl>
+    <Box
+      sx={{
+        width: 500,
+        maxWidth: '100%',
+        marginTop: '10px',
+        marginBottom: '10px',
+      }}
+    >
+      {!isEmpty(message) && (
+        <AlertFunction message={message} type={error ? 'warning' : 'success'} />
+      )}
 
-          
-          <TextField  fullWidth label="Ajouter Cours" id="cours" onChange={(e)=>setCours(e.target.value)}/>
-          <TextField  fullWidth label="Maxima" id="maxima" onChange={(e)=>setMaxima(e.target.value)}/>
+      <TextField
+        autoComplete="off"
+        onChange={(e) => handleChange(e)}
+        sx={{ marginBottom: '10px' }}
+        fullWidth
+        label="Branche"
+        name="branche"
+        id="branche"
+        value={branche}
+      />
+      <TextField
+        autoComplete="off"
+        // onChange={(e) => handleChange(e)}
+        sx={{ marginBottom: '10px' }}
+        fullWidth
+        label="Maxima"
+        name="maxima"
+        value={maxima}
+        id="maxima"
+        onChange={(e) => handleChange(e)}
+      />
+      <div style={{ marginBottom: '10px' }}>
+        <RadioButtonsGroup
+          title="Examen"
+          option={validation}
+          value={hookValidExamen}
+          setValue={setValidExamen}
+        />
+      </div>
 
-          <Button variant="contained" endIcon={<Add />} style={{marginTop:"20px"}} onClick={()=>submit()}>
-            Enregistrer
-        </Button>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={(e) => (!isEmpty(data) ? functionModCours(e) : submitCours(e))}
+      >
+        {!isEmpty(data) ? 'Modification' : 'Enregistrer'}
+      </Button>
     </Box>
-    
   )
 }
 

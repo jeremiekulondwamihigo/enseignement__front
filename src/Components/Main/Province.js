@@ -1,10 +1,7 @@
 import React, { useState} from 'react'
 import image1 from "../Images/team-2.jpg"
-import { useSelector } from "react-redux"
-import { lien_image_admin } from '../Static/Liens'
 import FormAgent from "../Nationale/Parameter/Form_Parameter/Agent"
 import Popup from '../Static/Popup'
-import Division from '../Province/Form/Division'
 
 function MainProvince({dataLog}) {
     const { data  } = dataLog
@@ -13,8 +10,6 @@ function MainProvince({dataLog}) {
         localStorage.removeItem("authToken");
         window.location.reload("/sign")
     }
-    const { annee } = useSelector(state => state.annee.items.year_actif)
-    const { nom, filename } = data[0].agent[0]
 
     const [openPopupDivision, setOpenPopupDivision] = useState(false)
     
@@ -236,7 +231,7 @@ function MainProvince({dataLog}) {
 
             </div>
         </div>
-        <Popup openPopup={openPopupDivision} setOpenPopup={setOpenPopupDivision} title="Ajouter une division">
+        <Popup openPopup={openPopupDivision} setOpenPopup={setOpenPopupDivision} title="Ajouter un agent">
             <FormAgent agentConnect={dataLog}/>
         </Popup>
     </div>

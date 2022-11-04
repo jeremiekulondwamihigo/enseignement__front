@@ -1,98 +1,170 @@
-.papier{
-    padding: 5px;
-    width: 40%;
-    height: 70vh;
-    overflow-y: auto;
-    overflow-x: auto;
-    
+.divContainer > .papier {
+  padding: 5px;
+  width: 30%;
+  height: 70vh;
+  overflow-y: auto;
+  overflow-x: auto;
 }
-.papier .option > h2{
-    font-weight: 600;
-    font-size: 15px;
-    opacity: 0.6;
-    color: black;
-    font-family: sans-serif, Arial, Helvetica, sans-serif;
+.papier .option > h2 {
+  font-weight: 600;
+  font-size: 15px;
+  opacity: 0.6;
+  color: black;
+  font-family: sans-serif, Arial, Helvetica, sans-serif;
 }
-li{
-    cursor: pointer;
-    margin-bottom: 7px;
-    transition: 0.5s ease-in;
+li {
+  cursor: pointer;
+  margin-bottom: 7px;
+  transition: 0.5s ease-in;
 }
-li:hover{
-    margin-left: 10px;
-    color: blue;
+li:hover {
+  margin-left: 10px;
+  color: blue;
 }
-.div > .span1{
-    display: flex;
-    height: 5vh;
-    align-items: center;
-    align-content: center;
-    margin-top: 5px;
-    cursor: pointer;
+.div > .span1 {
+  display: flex;
+  height: 5vh;
+  align-items: center;
+  align-content: center;
+  margin-top: 5px;
+  cursor: pointer;
 }
-.div{
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: space-between;
-    position: relative;
-    
+.div > .span1 > p {
+  margin-left: 5px;
 }
-.div > .span2{
-    cursor: pointer;
-    z-index: 20;
+.div {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 5px;
+}
+.div > .span2 {
+  cursor: pointer;
+  z-index: 20;
 }
 
-.div > p{
-    margin-left: 3px;
+.div > p {
+  margin-left: 3px;
 }
-.papier2{
-    padding: 10px;
-    width: 58%;
-    height: 70vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+.papier2 {
+  padding: 10px;
+  width: 68% !important;
+  height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: red;
 }
-.divContainer{
-    display: flex;
-    justify-content: space-between;
+.divContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
 }
-.container-option{
-    position: relative;
+.container-option {
+  position: relative;
+}
+.affiche_option {
+  display: flex;
+  margin-top: 1rem;
+  height: 4vh;
+  width: 100%;
+  background-color: #dedede;
+  padding: 5px;
+  border-radius: 5px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+table {
+  border-collapse: collapse;
+  margin-top: 15px;
+  justify-content: space-between;
+  width: 100%;
+}
+thead {
+  background-color: #dedede;
+  padding: 5px;
+}
+thead > tr {
+  padding: 10px;
+  width: 20%;
+  padding: 5px;
+}
+table > tbody > .domaine {
+  color: white;
+  text-align: center;
+}
+.img-avatar {
+  justify-content: center;
+  justify-items: center;
+}
 
+.educationBase {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 15px;
+  cursor: pointer;
 }
-.affiche_option{
-    display: flex;
-    margin-top: 1rem;
-    height: 4vh;
-    width: 100%;
-    background-color: #dedede;
-    padding: 5px;
-    border-radius: 5px;
-    justify-content: space-between;
-    cursor: pointer;
+
+.educationBase:hover {
+  color: blue;
 }
-table{
-    border-collapse: collapse;
-    margin-top: 15px;
-    justify-content: space-between;
-    width: 100%;
-    
+.papier2 > .container__second {
+  width: 100%;
+  display: flex;
 }
-thead{
-    background-color: #dedede;
-    padding: 5px;
+.__classe {
+  width: 30%;
+  height: 100%;
+  background-color: #dedede;
 }
-thead > tr{
-    padding: 10px;
-    width: 20%;
-    padding: 5px;
+.niveau {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
 }
-table > tbody > .domaine{
-    color: white;
-    text-align: center;
+.niveau:hover {
+  background-color: #dedede;
+  transition: 0.3s ease-in-out;
 }
-.img-avatar{
-    justify-content: center;
-    justify-items: center;
-} 
+.title__Option {
+  background-color: #dedede;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  position: relative;
+}
+.title__Option > div {
+  position: absolute;
+  right: 10px;
+}
+.title__Option > div > h4 {
+  font-size: 15px;
+}
+.title__Option > h5 {
+  font-size: 15px;
+  text-align: center;
+}
+.btn-classe {
+  border-radius: 20px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dedede;
+}
+.btn-classe:hover {
+  background-color: white;
+}
+.optionClasse {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  background-color: #dedede;
+  padding: 10px;
+  border-radius: 10px;
+}
